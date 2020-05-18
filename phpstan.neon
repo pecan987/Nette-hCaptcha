@@ -1,0 +1,12 @@
+includes:
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- vendor/phpstan/phpstan-nette/extension.neon
+	- vendor/phpstan/phpstan-nette/rules.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	ignoreErrors:
+		# false positive
+		- '#^Cannot call method getHttpData\(\) on Nette\\Forms\\Form\|null\.$#'
+		# datasource is too much difficult to predict
+		- '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
