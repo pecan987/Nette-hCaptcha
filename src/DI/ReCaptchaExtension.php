@@ -40,7 +40,6 @@ final class ReCaptchaExtension extends CompilerExtension
 	{
 		$method = $class->getMethod('initialize');
 		$method->addBody(sprintf('%s::bind($this->getService(?));', ReCaptchaBinding::class), [$this->prefix('provider')]);
-		$method->addBody(sprintf('%s::bind($this->getService(?));', InvisibleReCaptchaBinding::class), [$this->prefix('provider')]);
 	}
 
 }
