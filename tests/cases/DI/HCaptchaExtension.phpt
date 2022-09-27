@@ -3,11 +3,11 @@
 namespace Tests\Cases\DI;
 
 /**
- * Test: ReCaptchaExtension
+ * Test: HCaptchaExtension
  */
 
-use Contributte\ReCaptcha\DI\ReCaptchaExtension;
-use Contributte\ReCaptcha\ReCaptchaProvider;
+use Contributte\HCaptcha\DI\HCaptchaExtension;
+use Contributte\HCaptcha\HCaptchaProvider;
 use Nette\DI\Compiler;
 use Nette\DI\ContainerLoader;
 use Nette\DI\InvalidConfigurationException;
@@ -18,7 +18,7 @@ require __DIR__ . '/../../bootstrap.php';
 test(function () {
 	$loader = new ContainerLoader(TEMP_DIR);
 	$class = $loader->load(function (Compiler $compiler) {
-		$compiler->addExtension('captcha', new ReCaptchaExtension());
+		$compiler->addExtension('captcha', new HCaptchaExtension());
 
 		$compiler->addConfig([
 			'captcha' => [
@@ -29,15 +29,15 @@ test(function () {
 	}, 'SC' . time());
 
 	$container = new $class();
-	Assert::type(ReCaptchaProvider::class, $container->getByType(ReCaptchaProvider::class));
-	Assert::equal('foobar', $container->getByType(ReCaptchaProvider::class)->getSiteKey());
+	Assert::type(HCaptchaProvider::class, $container->getByType(HCaptchaProvider::class));
+	Assert::equal('foobar', $container->getByType(HCaptchaProvider::class)->getSiteKey());
 });
 
 test(function () {
 	Assert::exception(function () {
 		$loader = new ContainerLoader(TEMP_DIR);
 		$loader->load(function (Compiler $compiler) {
-			$compiler->addExtension('captcha', new ReCaptchaExtension());
+			$compiler->addExtension('captcha', new HCaptchaExtension());
 			$compiler->addConfig([
 				'captcha' => [
 					'siteKey' => 'foobar',

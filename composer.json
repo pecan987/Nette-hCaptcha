@@ -34,7 +34,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Contributte\\ReCaptcha\\": "src"
+      "Contributte\\HCaptcha\\": "src"
     }
   },
   "minimum-stability": "dev",

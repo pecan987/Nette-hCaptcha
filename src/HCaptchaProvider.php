@@ -1,20 +1,20 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\ReCaptcha;
+namespace Contributte\HCaptcha;
 
 use Nette\Forms\Controls\BaseControl;
 use Nette\SmartObject;
 
 /**
- * @method onValidateControl(ReCaptchaProvider $provider, BaseControl $control)
- * @method onValidate(ReCaptchaProvider $provider, mixed $response)
+ * @method onValidateControl(HCaptchaProvider $provider, BaseControl $control)
+ * @method onValidate(HCaptchaProvider $provider, mixed $response)
  */
-class ReCaptchaProvider
+class HCaptchaProvider
 {
 
 	use SmartObject;
 
-	// ReCaptcha FTW!
+	// HCaptcha FTW!
 	public const FORM_PARAMETER = 'h-captcha-response';
 	public const VERIFICATION_URL = 'https://hcaptcha.com/siteverify';
 
@@ -44,7 +44,7 @@ class ReCaptchaProvider
 	/**
 	 * @param mixed $response
 	 */
-	public function validate($response): ?ReCaptchaResponse
+	public function validate($response): ?HCaptchaResponse
 	{
 		// Fire events!
 		$this->onValidate($this, $response);
@@ -61,7 +61,7 @@ class ReCaptchaProvider
 		$answer = json_decode($response, true);
 
 		// Return response
-		return $answer['success'] === true ? new ReCaptchaResponse(true) : new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
+		return $answer['success'] === true ? new HCaptchaResponse(true) : new HCaptchaResponse(false, $answer['error-codes'] ?? null);
 	}
 
 	public function validateControl(BaseControl $control): bool

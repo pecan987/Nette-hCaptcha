@@ -1,17 +1,17 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\ReCaptcha\Forms;
+namespace Contributte\HCaptcha\Forms;
 
-use Contributte\ReCaptcha\ReCaptchaProvider;
+use Contributte\HCaptcha\HCaptchaProvider;
 use Nette\Forms\Controls\TextInput;
 use Nette\Forms\Form;
 use Nette\Forms\Rules;
 use Nette\Utils\Html;
 
-class ReCaptchaField extends TextInput
+class HCaptchaField extends TextInput
 {
 
-	/** @var ReCaptchaProvider */
+	/** @var HCaptchaProvider */
 	private $provider;
 
 	/** @var bool */
@@ -20,7 +20,7 @@ class ReCaptchaField extends TextInput
 	/** @var string|null */
 	private $message;
 
-	public function __construct(ReCaptchaProvider $provider, ?string $label = null, ?string $message = null)
+	public function __construct(HCaptchaProvider $provider, ?string $label = null, ?string $message = null)
 	{
 		parent::__construct($label);
 		$this->provider = $provider;
@@ -34,7 +34,7 @@ class ReCaptchaField extends TextInput
 
 	public function loadHttpData(): void
 	{
-		$this->setValue($this->getForm()->getHttpData(Form::DATA_TEXT, ReCaptchaProvider::FORM_PARAMETER));
+		$this->setValue($this->getForm()->getHttpData(Form::DATA_TEXT, HCaptchaProvider::FORM_PARAMETER));
 	}
 
 	public function setMessage(string $message): self

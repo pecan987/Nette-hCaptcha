@@ -1,16 +1,16 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\ReCaptcha\DI;
+namespace Contributte\HCaptcha\DI;
 
-use Contributte\ReCaptcha\Forms\InvisibleReCaptchaBinding;
-use Contributte\ReCaptcha\Forms\ReCaptchaBinding;
-use Contributte\ReCaptcha\ReCaptchaProvider;
+use Contributte\HCaptcha\Forms\InvisibleHCaptchaBinding;
+use Contributte\HCaptcha\Forms\HCaptchaBinding;
+use Contributte\HCaptcha\HCaptchaProvider;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 
-final class ReCaptchaExtension extends CompilerExtension
+final class HCaptchaExtension extends CompilerExtension
 {
 
 	public function getConfigSchema(): Schema
@@ -30,7 +30,7 @@ final class ReCaptchaExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('provider'))
-			->setFactory(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey']]);
+			->setFactory(HCaptchaProvider::class, [$config['siteKey'], $config['secretKey']]);
 	}
 
 	/**
@@ -39,7 +39,7 @@ final class ReCaptchaExtension extends CompilerExtension
 	public function afterCompile(ClassType $class): void
 	{
 		$method = $class->getMethod('initialize');
-		$method->addBody(sprintf('%s::bind($this->getService(?));', ReCaptchaBinding::class), [$this->prefix('provider')]);
+		$method->addBody(sprintf('%s::bind($this->getService(?));', HCaptchaBinding::class), [$this->prefix('provider')]);
 	}
 
 }

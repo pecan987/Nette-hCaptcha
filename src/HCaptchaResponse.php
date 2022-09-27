@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\ReCaptcha;
+namespace Contributte\HCaptcha;
 
-final class ReCaptchaResponse
+final class HCaptchaResponse
 {
 
 	// Error code list

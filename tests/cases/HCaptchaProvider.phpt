@@ -3,11 +3,11 @@
 namespace Tests\Cases;
 
 /**
- * Test: ReCaptchaProvider
+ * Test: HCaptchaProvider
  */
 
-use Contributte\ReCaptcha\ReCaptchaProvider;
-use Contributte\ReCaptcha\ReCaptchaResponse;
+use Contributte\HCaptcha\HCaptchaProvider;
+use Contributte\HCaptcha\HCaptchaResponse;
 use Nette\Forms\Controls\BaseControl;
 use Tester\Assert;
 
@@ -28,10 +28,10 @@ final class ControlMock extends BaseControl
 
 test(function () {
 	$key = 'key';
-	$validator = new ReCaptchaProvider($key, 'secret');
+	$validator = new HCaptchaProvider($key, 'secret');
 
 	$response = $validator->validate('test');
-	Assert::type(ReCaptchaResponse::class, $response);
+	Assert::type(HCaptchaResponse::class, $response);
 
 	Assert::false($response->isSuccess());
 	Assert::notEqual(null, $response->getError());
@@ -39,14 +39,14 @@ test(function () {
 
 test(function () {
 	$key = 'key';
-	$validator = new ReCaptchaProvider($key, 'secret');
+	$validator = new HCaptchaProvider($key, 'secret');
 
 	Assert::false($validator->validateControl(new ControlMock()));
 });
 
 test(function () {
 	$key = 'key';
-	$validator = new ReCaptchaProvider($key, 'secret');
+	$validator = new HCaptchaProvider($key, 'secret');
 
 	Assert::false($validator->validateControl(new ControlMock()));
 });

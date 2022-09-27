@@ -3,11 +3,11 @@
 namespace Tests\Cases\Forms;
 
 /**
- * Test: ReCaptchaField
+ * Test: HCaptchaField
  */
 
-use Contributte\ReCaptcha\Forms\ReCaptchaField;
-use Contributte\ReCaptcha\ReCaptchaProvider;
+use Contributte\HCaptcha\Forms\HCaptchaField;
+use Contributte\HCaptcha\HCaptchaProvider;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
@@ -29,11 +29,11 @@ final class FormMock extends Form
 }
 
 test(function () {
-	$field = new ReCaptchaField(new ReCaptchaProvider('foobar', 'secret'));
-	Assert::equal(['g-recaptcha' => true], $field->getControlPrototype()->getClass());
+	$field = new HCaptchaField(new HCaptchaProvider('foobar', 'secret'));
+	Assert::equal(['g-HCaptcha' => true], $field->getControlPrototype()->getClass());
 
 	$field->getControlPrototype()->addClass('foo');
-	Assert::equal(['g-recaptcha' => true, 'foo' => true], $field->getControlPrototype()->getClass());
+	Assert::equal(['g-HCaptcha' => true, 'foo' => true], $field->getControlPrototype()->getClass());
 
 	$field->getControlPrototype()->class('foobar');
 	Assert::equal('foobar', $field->getControlPrototype()->getClass());
@@ -43,7 +43,7 @@ test(function () {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';
-	$field = new ReCaptchaField(new ReCaptchaProvider('foobar', 'secret'));
+	$field = new HCaptchaField(new HCaptchaProvider('foobar', 'secret'));
 	$form->addComponent($field, $fieldName);
 
 	Assert::type(Html::class, $field->getControl());
@@ -56,7 +56,7 @@ test(function () {
 
 	$fieldName = 'captcha';
 	$key = 'key';
-	$field = new ReCaptchaField(new ReCaptchaProvider('key', 'secret'));
+	$field = new HCaptchaField(new HCaptchaProvider('key', 'secret'));
 	$form->addComponent($field, $fieldName);
 
 	Assert::equal($key, $field->getControl()->{'data-sitekey'});
@@ -67,12 +67,12 @@ test(function () {
 
 	$fieldName = 'captcha';
 	$label = 'label';
-	$field = new ReCaptchaField(new ReCaptchaProvider('key', 'secret'), $label);
+	$field = new HCaptchaField(new HCaptchaProvider('key', 'secret'), $label);
 	$form->addComponent($field, $fieldName);
 
 	Assert::equal('', $field->getValue());
 	Assert::same($label, $field->caption);
 
 	$field->loadHttpData();
-	Assert::equal(ReCaptchaProvider::FORM_PARAMETER, $field->getValue());
+	Assert::equal(HCaptchaProvider::FORM_PARAMETER, $field->getValue());
 });
