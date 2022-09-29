@@ -63,11 +63,12 @@ class HCaptchaField extends TextInput
 			return;
 		}
 
+		$this->configured = true;
+
 		$message = $this->message ?? 'Are you a bot?';
 		$this->addRule(function ($code) {
 			return $this->verify() === true;
 		}, $message);
-		$this->configured = true;
 	}
 
 	public function verify(): bool
